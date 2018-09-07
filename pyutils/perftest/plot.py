@@ -147,14 +147,19 @@ def history(results, key='job', limit=None):
     formatter.scaled[1 / (24 * 60 * 60)] = '%y-%m-%d %H:%M:%S'
 
 
-    stencils = numpy.array_split(numpy.array(data[0]),6)
-    mints = numpy.array_split(numpy.array(data[1]),6)
-    q1s = numpy.array_split(numpy.array(data[2]),6)
-    q2s = numpy.array_split(numpy.array(data[3]),6)
-    q3s = numpy.array_split(numpy.array(data[4]),6)
-    maxts = numpy.array_split(numpy.array(data[5]),6)
+    ### Sort by mean time
+    three, zero, one, two, four, five = zip(*sorted(zip(data[3], data[0], data[1], data[2], data[4], data[5])))
+    
+ 
+    stencils = numpy.array_split(numpy.array(zero),6)
+    mints = numpy.array_split(numpy.array(one),6)
+    q1s = numpy.array_split(numpy.array(two),6)
+    q2s = numpy.array_split(numpy.array(three),6)
+    q3s = numpy.array_split(numpy.array(four),6)
+    maxts = numpy.array_split(numpy.array(five),6)
 
     colors = discrete_colors(len(stencils[0]))
+
 
     fig, ax = plt.subplots(3,2,figsize=figsize(4,2))
 

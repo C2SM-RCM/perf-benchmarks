@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-from collections import Counter
 import numpy as np
 
 from perftest import ArgumentError, logger, ParseError, time
@@ -193,7 +192,7 @@ def percentiles_by_stencil(results, percentiles):
         number of returned values depends on the number of input percentiles.
     """
     stencils = results[0].stencils
-    if any(Counter(stencils) != Counter(r.stencils) for r in results):
+    if any(stencils != r.stencils for r in results):
         raise ArgumentError('All results must include the same stencils')
 
     qtimes = []

@@ -1,0 +1,4 @@
+pyutils/venv/*
+pyutils/.*
+pyutils/perftest/__pycache__
+*.pyc

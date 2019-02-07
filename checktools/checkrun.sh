@@ -35,11 +35,11 @@ if [ $? -gt 15 ]; then
     status=1
 fi
 
-# ${checktool_dir}/output_tolerance_check.py
-# if [ $? -gt 15 ]; then
-#    echo "output_tolerance_check : fail"
-#    status=1
-# fi
+${checktool_dir}/output_tolerance_check.py
+if [ $? -gt 15 ]; then
+   echo "output_tolerance_check : fail"
+   status=1
+fi
 
 ${checktool_dir}/timing_check.py -f $1
 if [ $? -gt 15 ]; then

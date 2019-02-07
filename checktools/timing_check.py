@@ -12,7 +12,7 @@ import os, sys, re, json
 import argparse
 
 # private modules
-# sys.path.append('./tools') 
+sys.path.append('./tools') 
 sys.path.append('../checktools/tools') 
 sys.path.append('../perf-benchmarks/checktools/tools') 
 from ts_utilities import read_environ, dir_path

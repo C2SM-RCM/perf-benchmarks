@@ -10,10 +10,11 @@
 # Mail         xavier.lapillonne@meteoswiss.ch
 
 # Set variables
-checktool_dir="../checktools"
+# checktool_dir="../checktools"
+checktool_dir="../perf-benchmarks/checktools"
 recipients="xavier.lapillonne@meteoswiss.ch guy.demorsier@meteoswiss.ch carlos.osuna@meteoswiss.ch"
 
-diff ./owm_YUSPECIF ./YUSPECIF > tmp_diff_YUSPECIF_owm_vs_benchmark.txt
+diff -bitw ./owm_YUSPECIF ./YUSPECIF > tmp_diff_YUSPECIF_owm_vs_benchmark.txt
 status=$?
 # check if diff fail (missing file ...), status 1 is ok
 if [ $status -gt 1 ]; then

@@ -54,11 +54,11 @@ def parse():
 def get_reference_timings():
     import ConfigParser
     config = ConfigParser.RawConfigParser()
-    # env = read_environ()
-    # rundir = env['RUNDIR']
-    # timings_file = env['TIMINGS']
-    rundir = "."
-    timings_file = "ref_timing"
+    env = read_environ()
+    rundir = env['RUNDIR']
+    timings_file = env['TIMINGS']
+    # rundir = "."
+    # timings_file = "ref_timing"
     file_path = dir_path(rundir)+timings_file
     config.read(file_path)
     threshold = float(config.get('timings', 'threshold'))

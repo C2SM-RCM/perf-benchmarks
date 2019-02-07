@@ -2,7 +2,6 @@
 
 from perftest import ArgumentError
 from datetime import datetime, timezone
-from dateutil.parser import parse
 
 
 def now():

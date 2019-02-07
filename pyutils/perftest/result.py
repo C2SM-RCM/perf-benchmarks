@@ -133,7 +133,7 @@ def load(filename):
                     times=times_data,
                     config=config_data,
                     domain=data.get('domain', []),
-                    datetime=time.from_timestr(data['datetime']),
+                    datetime=time.from_timestr(data['runtime']['datetime']),
                     version=data.get('version', 'unknown'))
     logger.info(f'Successfully loaded result from {filename}')
     return result

@@ -27,24 +27,29 @@ export TS_BASEDIR="."
 export TS_FORCEMATCH="TRUE"
 
 
-
 #run checkers
 ${checktool_dir}/run_success_check.py
 if [ $? -gt 15 ]; then
     echo "run_success_check : fail"
     status=1
+else
+   echo "run_success_check : success"
 fi
 
 ${checktool_dir}/output_tolerance_check.py
 if [ $? -gt 15 ]; then
    echo "output_tolerance_check : fail"
    status=1
+else
+   echo "output_tolerance_check : success"
 fi
 
 ${checktool_dir}/timing_check.py -f $1
 if [ $? -gt 15 ]; then
     echo "timing_check : fail"
     status=1
+else
+   echo "timing_check : success"
 fi
 
 

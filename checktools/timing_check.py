@@ -144,11 +144,12 @@ def parse_and_write(filename="None"):
 def check_tolerance(filename="None"):
     if filename == "unknown":
         print "None"
+        return 20
     else:
         with open(filename) as f:
             data = json.load(f)
         timing = data['times']
-        checkjson(timing)
+        return checkjson(timing)
 
 
 if __name__ == "__main__":

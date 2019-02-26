@@ -34,7 +34,15 @@ def timestr(time):
     Returns:
         A string representing `time`, compatible to ISO 8601 time format.
     """
-    return time.strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+    try:
+        dt_format = ('%Y-%m-%dT%H:%M:%S.%f%z', '%a %b %d %H:%M:&S %Z %Y', '%Y-%m-%d %H;%M')
+        for current_format in dt_format:
+            try:
+                return time.strftime(timestr, current_format)
+            except ValueError:
+                pass
+    except ValueError:
+        raise ArgumentError(f'"{timestr}" is an invalid time string') from None
 
 
 def from_timestr(timestr):
@@ -50,9 +58,16 @@ def from_timestr(timestr):
         A `datetime.datetime` object, representing the same time as `timestr`.
     """
     try:
-        return datetime.strptime(timestr, '%Y-%m-%dT%H:%M:%S.%f%z')
+        dt_format = ('%Y-%m-%dT%H:%M:%S.%f%z', '%a %b %d %H:%M:%S %Z %Y', '%Y-%m-%d %H:%M')
+        for current_format in dt_format:
+            try:
+                return datetime.strptime(timestr, current_format)
+            except ValueError:
+                pass
+
+        raise ValueError
     except ValueError:
-        raise ArgumentError(f'"{timestr}" is an invalid time string') from None
+        ArgumentError(f'"{timestr}" is an invalid time string')
 
 
 def short_timestr(time):

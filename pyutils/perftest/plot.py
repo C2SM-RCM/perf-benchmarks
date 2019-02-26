@@ -146,27 +146,12 @@ def history(results, key='job', limit=None):
     formatter.scaled[1 / (24 * 60)] = '%y-%m-%d %H:%M'
     formatter.scaled[1 / (24 * 60 * 60)] = '%y-%m-%d %H:%M:%S'
 
+    if len(data[0]) < 8:
+        q2, stencil, mint, q1, q3, maxt = zip(*sorted(zip(data[3], data[0], data[1], data[2], data[4], data[5])))
+        colors = discrete_colors(len(stencil[0]))
+        fig, ax = plt.subplots(1, 1, figsize=figsize(4, 2))
 
-    ### Sort by mean time
-    three, zero, one, two, four, five = zip(*sorted(zip(data[3], data[0], data[1], data[2], data[4], data[5])))
-    
- 
-    stencils = numpy.array_split(numpy.array(zero),6)
-    mints = numpy.array_split(numpy.array(one),6)
-    q1s = numpy.array_split(numpy.array(two),6)
-    q2s = numpy.array_split(numpy.array(three),6)
-    q3s = numpy.array_split(numpy.array(four),6)
-    maxts = numpy.array_split(numpy.array(five),6)
-
-    colors = discrete_colors(len(stencils[0]))
-
-
-    fig, ax = plt.subplots(3,2,figsize=figsize(4,2))
-
-    axes = itertools.chain(*ax)
-    for cstencil, cmint, cq1, cq2, cq3, cmaxt, ax in zip(stencils, mints, q1s, q2s, q3s, maxts, axes):
-
-        for color, stencil, mint, q1, q2, q3, maxt in zip(colors, cstencil, cmint, cq1, cq2, cq3, cmaxt):
+        for color, stencil, mint, q1, q2, q3, maxt in zip(colors, stencil, mint, q1, q2, q3, maxt):
             ax.fill_between(dates, mint, maxt, alpha=0.2, color=color)
             ax.fill_between(dates, q1, q3, alpha=0.5, color=color)
             ax.plot(dates, q2, '|-', label=stencil.title(), color=color)
@@ -176,7 +161,67 @@ def history(results, key='job', limit=None):
         ax.xaxis.set_major_locator(locator)
         ax.xaxis.set_major_formatter(formatter)
 
-    fig.autofmt_xdate()
-    fig.tight_layout()
+        fig.autofmt_xdate()
+        fig.tight_layout()
+
+    elif len(data[0]) < 20:
+        # Sort by mean time
+        three, zero, one, two, four, five = zip(*sorted(zip(data[3], data[0], data[1], data[2], data[4], data[5])))
+        stencils = numpy.array_split(numpy.array(zero), 4)
+        mints = numpy.array_split(numpy.array(one), 4)
+        q1s = numpy.array_split(numpy.array(two), 4)
+        q2s = numpy.array_split(numpy.array(three), 4)
+        q3s = numpy.array_split(numpy.array(four), 4)
+        maxts = numpy.array_split(numpy.array(five), 4)
+
+        colors = discrete_colors(len(stencils[0]))
+
+        fig, ax = plt.subplots(2, 2, figsize=figsize(4, 2))
+
+        axes = itertools.chain(*ax)
+        for cstencil, cmint, cq1, cq2, cq3, cmaxt, ax in zip(stencils, mints, q1s, q2s, q3s, maxts, axes):
+
+            for color, stencil, mint, q1, q2, q3, maxt in zip(colors, cstencil, cmint, cq1, cq2, cq3, cmaxt):
+                ax.fill_between(dates, mint, maxt, alpha=0.2, color=color)
+                ax.fill_between(dates, q1, q3, alpha=0.5, color=color)
+                ax.plot(dates, q2, '|-', label=stencil.title(), color=color)
+
+            ax.legend(loc='upper left')
+
+            ax.xaxis.set_major_locator(locator)
+            ax.xaxis.set_major_formatter(formatter)
+
+        fig.autofmt_xdate()
+        fig.tight_layout()
+
+    else:
+        # Sort by mean time
+        three, zero, one, two, four, five = zip(*sorted(zip(data[3], data[0], data[1], data[2], data[4], data[5])))
+        stencils = numpy.array_split(numpy.array(zero), 6)
+        mints = numpy.array_split(numpy.array(one), 6)
+        q1s = numpy.array_split(numpy.array(two), 6)
+        q2s = numpy.array_split(numpy.array(three), 6)
+        q3s = numpy.array_split(numpy.array(four), 6)
+        maxts = numpy.array_split(numpy.array(five), 6)
+
+        colors = discrete_colors(len(stencils[0]))
+
+        fig, ax = plt.subplots(3, 2, figsize=figsize(4, 2))
+
+        axes = itertools.chain(*ax)
+        for cstencil, cmint, cq1, cq2, cq3, cmaxt, ax in zip(stencils, mints, q1s, q2s, q3s, maxts, axes):
+
+            for color, stencil, mint, q1, q2, q3, maxt in zip(colors, cstencil, cmint, cq1, cq2, cq3, cmaxt):
+                ax.fill_between(dates, mint, maxt, alpha=0.2, color=color)
+                ax.fill_between(dates, q1, q3, alpha=0.5, color=color)
+                ax.plot(dates, q2, '|-', label=stencil.title(), color=color)
+
+            ax.legend(loc='upper left')
+
+            ax.xaxis.set_major_locator(locator)
+            ax.xaxis.set_major_formatter(formatter)
+
+        fig.autofmt_xdate()
+        fig.tight_layout()
 
     return fig

@@ -108,33 +108,33 @@ def load(filename):
     with open(filename, 'r') as fp:
         data = json.load(fp)
 
-    if data['version'] != version:
-        print("version is " + data['version'])
-        raise ParseError('Unknown result file version')
+    # if data['version'] != version:
+    #     print("version is " + data['version'])
+    #     raise ParseError('Unknown result file version')
 
     times_data = [Data(stencil=d['stencil'], measurements=d['measurements'])
                   for d in data['times']]
 
     d = data['runtime']
     runtime_data = Data(name=d['name'],
-                        version=d['version'],
+                        version=d.get('version', 'default'),
                         datetime=time.from_timestr(d['datetime']),
-                        grid=d['grid'],
-                        precision=d['precision'],
-                        backend=d['backend'],
-                        compiler=d['compiler'])
+                        grid=d.get('grid', 'unknown'),
+                        precision=d.get('precision', 'unknown'),
+                        backend=d.get('backend', 'unknown'),
+                        compiler=d.get('compiler', 'unknown'))
 
     d = data['config']
-    config_data = Data(configname=d['configname'],
-                       hostname=d['hostname'],
-                       clustername=d['clustername'])
+    config_data = Data(configname=d.get('configname', 'unknown'),
+                       hostname=d.get('hostname', 'unknown'),
+                       clustername=d.get('clustername', 'unknown'))
 
     result = Result(runtime=runtime_data,
                     times=times_data,
                     config=config_data,
-                    domain=data['domain'],
-                    datetime=time.from_timestr(data['datetime']),
-                    version=data['version'])
+                    domain=data.get('domain', []),
+                    datetime=time.from_timestr(data['runtime']['datetime']),
+                    version=data.get('version', 'unknown'))
     logger.info(f'Successfully loaded result from {filename}')
     return result
 

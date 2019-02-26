@@ -86,17 +86,17 @@ class Runtime(metaclass=abc.ABCMeta):
         """Name, class name converted to lower case and 'Runtime' stripped."""
         return type(self).__name__.lower().rstrip('runtime')
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def version(self):
         """Version number or hash."""
         pass
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def datetime(self):
         """(Build or commit) date of the software as a string."""
         pass
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def compiler(self):
         pass
 
@@ -129,7 +129,7 @@ class StellaRuntimeBase(Runtime):
         filt = stencil.stella_filter
         return f'{binary} --ie {ni} --je {nj} --ke {nk} --gtest_filter={filt}'
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def path(self):
         pass
 

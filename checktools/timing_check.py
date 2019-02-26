@@ -43,10 +43,6 @@ def parse():
     yutimings = "YUTIMING"
     cosmolog = env['LOGFILE']
     slurmlog = env['LOGFILE_SLURM']
-    # rundir = "."
-    # yutimings = "YUTIMING"
-    # cosmolog = "lmf_f90.log"
-    # slurmlog = "slurm.log"
     name = "Cosmo run in "+rundir
     return COSMO_Run_yu(folder=rundir, name=name, yutimings=yutimings, cosmolog=cosmolog, slurmlog=slurmlog)
 
@@ -57,8 +53,6 @@ def get_reference_timings():
     env = read_environ()
     rundir = env['RUNDIR']
     timings_file = env['TIMINGS']
-    # rundir = "."
-    # timings_file = "ref_timing"
     file_path = dir_path(rundir)+timings_file
     config.read(file_path)
     threshold = float(config.get('timings', 'threshold'))

@@ -16,8 +16,8 @@ status=0
 
 # set environment variables for the checkers
 export TS_RUNDIR="."
-export TS_LOGFILE="lm_f90.out"
-export TS_LOGFILE_SLURM="exe.log"
+export TS_LOGFILE="run.out"
+export TS_LOGFILE_SLURM="slurm.log"
 export TS_VERBOSE=1
 export TS_REFOUTDIR="./reference_${REAL_TYPE}"
 export TS_NAMELISTDIR="."
@@ -61,7 +61,7 @@ fi
 
 # Check if there are changes with respect to owm YUSPECIF
 # This will send a warning if not (but won't change the exit status)
-#${checktool_dir}/yuspecif_owm_check.sh
+${checktool_dir}/yuspecif_owm_check.sh
 
 exit $status
 

@@ -265,16 +265,6 @@ class COSMO_Run_yu:
             io = ["Input", "Output"]
             for result in io:
                 val = body[result]["max"] + val
-                if result is "Input":
-                  val = body[result]["read data"]["max"] + val
-                  val = body[result]["meta data"]["max"] + val
-                  val = body[result]["computations I"]["max"] + val
-                  val = body[result]["distribute data"]["max"] + val
-                if result is "Output":
-                  val = body[result]["computations O"]["max"] + val
-                  val = body[result]["meta data"]["max"] + val
-                  val = body[result]["write data"]["max"] + val
-                  val = body[result]["gather data"]["max"] + val
             self.timings.append(("io max", val))
 
     def __str__(self):

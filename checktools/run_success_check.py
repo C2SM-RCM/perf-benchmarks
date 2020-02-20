@@ -12,9 +12,7 @@ simulation
 import os, re, sys
 
 # private modules
-sys.path.append("./tools") # this is the generic folder for subroutines
-sys.path.append('../checktools/tools') 
-sys.path.append('../perf-benchmarks/checktools/tools')
+sys.path.append(os.path.join(os.path.dirname(__file__), "tools"))
 from ts_utilities import read_environ, dir_path
 
 # information

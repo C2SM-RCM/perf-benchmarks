@@ -33,7 +33,7 @@ if [ "$nl_ref" -ne "$nl_bench" ]; then
     echo `pwd` |tee -a tmp_mail.txt
     echo "diff tmp_diff_YUSPECIF_owm_vs_benchmark.txt diff_YUSPECIF_owm_vs_benchmark.txt :"
     diff tmp_diff_YUSPECIF_owm_vs_benchmark.txt reference_${REAL_TYPE}/diff_YUSPECIF_owm_vs_benchmark.txt |tee -a tmp_mail.txt
-    cat tmp_mail.txt | mail -s "COSMO - benchmark : changes against owm_YUSPECIF" "$recipients"
+    cat tmp_mail.txt | mail -s "COSMO-ORG - benchmark: changes against owm_YUSPECIF" "$recipients"
     rm tmp_mail.txt
 fi
 rm tmp_diff_YUSPECIF_owm_vs_benchmark.txt

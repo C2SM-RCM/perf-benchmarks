@@ -39,7 +39,11 @@ fi
 ${checktool_dir}/output_tolerance_check.py
 if [ $? -gt 15 ]; then
    echo "output_tolerance_check : fail"
-   status=1
+   if [[ ${TOLERANCE_CHECK} == "ON" ]]; then
+      status=1
+   else
+      echo "WARNING: output_tolerance_check : fail!"
+   fi
 else
    echo "output_tolerance_check : success"
 fi

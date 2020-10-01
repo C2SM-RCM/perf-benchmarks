@@ -14,7 +14,7 @@ from perftest import ArgumentError, logger, result, time
 import numpy
 
 plt.style.use('ggplot')
-plt.rc("font", size=16)
+plt.rc("font", size=32)
 
 prop_cycle = matplotlib.rcParams['axes.prop_cycle']
 

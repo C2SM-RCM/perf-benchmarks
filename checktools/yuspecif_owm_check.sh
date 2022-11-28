@@ -12,7 +12,7 @@
 # Set variables
 # checktool_dir="../checktools"
 checktool_dir="../perf-benchmarks/checktools"
-recipients="xavier.lapillonne@meteoswiss.ch guy.demorsier@meteoswiss.ch carlos.osuna@meteoswiss.ch"
+recipients="xavier.lapillonne@meteoswiss.ch carlos.osuna@meteoswiss.ch"
 
 diff -bitw ./owm_YUSPECIF ./YUSPECIF > tmp_diff_YUSPECIF_owm_vs_benchmark.txt
 status=$?

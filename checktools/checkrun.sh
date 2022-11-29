@@ -40,6 +40,10 @@ ${checktool_dir}/output_tolerance_check.py
 if [ $? -gt 15 ]; then
    echo "output_tolerance_check : fail"
    status=1
+   if [[ ${TOLERANCE_CHECK} == "OFF" ]]; then
+      status=0
+      echo "WARNING: output_tolerance_check : fail!"
+   fi
 else
    echo "output_tolerance_check : success"
 fi
@@ -61,7 +65,8 @@ fi
 
 # Check if there are changes with respect to owm YUSPECIF
 # This will send a warning if not (but won't change the exit status)
-${checktool_dir}/yuspecif_owm_check.sh
+# XL: Deactiavted check tools - keep benchmark static
+# ${checktool_dir}/yuspecif_owm_check.sh
 
 exit $status
 

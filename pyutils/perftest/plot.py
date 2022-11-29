@@ -14,6 +14,7 @@ from perftest import ArgumentError, logger, result, time
 import numpy
 
 plt.style.use('ggplot')
+plt.rc("font", size=32)
 
 prop_cycle = matplotlib.rcParams['axes.prop_cycle']
 
@@ -156,7 +157,7 @@ def history(results, key='job', limit=None):
             ax.fill_between(dates, q1, q3, alpha=0.5, color=color)
             ax.plot(dates, q2, '|-', label=stencil.title(), color=color)
 
-        ax.legend(loc='upper left')
+        ax.legend(loc='upper left', fontsize='large')
 
         ax.xaxis.set_major_locator(locator)
         ax.xaxis.set_major_formatter(formatter)

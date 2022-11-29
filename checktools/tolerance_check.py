@@ -11,9 +11,7 @@ YUPRTEST files.
 import os, sys
 
 # private modules
-sys.path.append('./tools/') 
-sys.path.append('../checktools/tools') 
-sys.path.append('../perf-benchmarks/checktools/tools')
+sys.path.append(os.path.join(os.path.dirname(__file__), "tools"))
 from ts_utilities import read_environ, dir_path
 from ts_fortran_nl import get_param
 import comp_yuprtest
